@@ -8,8 +8,8 @@
     <!-- Librerías externas -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- jsPDF Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script> <!-- jsPDF AutoTable Plugin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
     <!-- Hojas de estilo -->
@@ -52,11 +52,11 @@
                         <button class="dropdown-toggle-btn" id="user-menu-toggle">
                             Menú <span class="arrow-down">&#9660;</span>
                         </button>
-                                                <div class="dropdown-content" id="user-dropdown-content">
-                                                    <a href="#" id="logout-btn">Cerrar Sesión</a>
-                                                    <a href="#" id="menu-artefactos">Artefactos</a>
-                                                    <a href="#" id="settings-btn" data-pestana="configuracion">Configuración</a>
-                                                </div>
+                        <div class="dropdown-content" id="user-dropdown-content">
+                            <a href="#" id="menu-artefactos">Artefactos</a>
+                            <a href="#" id="settings-btn" data-pestana="configuracion">Configuración</a>
+                            <a href="#" id="logout-btn" style="color: #dc3545;">Cerrar Sesión</a>
+                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -293,12 +293,14 @@
                             </div>
                         
                             <!-- Scripts -->
-                            <script src="Scripts/common.js"></script>
-                            <script src="Scripts/login.js"></script>
-                            <script src="Scripts/artefactos.js"></script>
-                            <script src="Scripts/cnosumo.js"></script>
-                            <script src="Scripts/corrientes.js"></script>
-                            <script src="Scripts/facturas.js"></script>
+                            <script src="Scripts/common.js?v=2"></script>
+    <script src="Scripts/login.js?v=2"></script>
+    <script src="Scripts/artefactos.js?v=2"></script>
+    <script src="Scripts/consumo.js?v=2"></script>
+    <script src="Scripts/corrientes.js?v=2"></script>
+    <script src="Scripts/facturas.js?v=2"></script>
+</body>
+</html>
                         
                             <!-- Modal de confirmación (usado por Facturación para consumos altos) -->
                             <div id="confirm-modal" class="confirm-modal" style="display:none;">

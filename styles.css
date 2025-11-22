@@ -30,6 +30,11 @@ body {
     transition: all 0.3s ease;
 }
 
+/* Estilo para el cursor de espera */
+body.wait-cursor, body.wait-cursor * {
+    cursor: wait !important;
+}
+
 .pestana-btn.active {
     background-color: #fff;
     border-bottom-color: #fff;
