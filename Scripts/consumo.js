@@ -114,7 +114,7 @@ App.Consumo = (function(window, $) {
         const head = [['Dispositivo', 'Potencia\n(W)', 'FP', 'Cant.', 'H/D', 'Cons. Diario\n(kWh)', 'Cons. Mensual\n(kWh)']];
         const body = aparatosSeleccionados.map(a => {
             const potenciaTotal = (a.vatios || 0) * (a.cantidad || 0);
-            const consumoDiario = (potenciaTotal * (a.horasDiarias || 0)) / (a.factorPotencia || 0.9) / 1000;
+            const consumoDiario = (potenciaTotal * (a.horasDiarias || 0)) / 1000;
             const consumoMensual = consumoDiario * diasMes;
             return [
                 a.nombre,
@@ -203,11 +203,11 @@ App.Consumo = (function(window, $) {
         const diasMes = App.Config.data.diasMes;
 
         aparatosSeleccionados.forEach((aparato, indice) => {
-            const consumo = (aparato.vatios * aparato.cantidad * aparato.horasDiarias * diasMes) / aparato.factorPotencia / 1000;
+            const consumo = (aparato.vatios * aparato.cantidad * aparato.horasDiarias * diasMes) / 1000;
             const fila = $(`
                 <div class="fila-item" data-indice="${indice}">
                     <div><strong>${aparato.nombre}</strong></div>
-                    <div class="consumo-detalle">${aparato.vatios}W × ${aparato.cantidad} und × ${aparato.horasDiarias}h/día × FP ${aparato.factorPotencia}</div>
+                <div class="consumo-detalle">${aparato.vatios}W × ${aparato.cantidad} und × ${aparato.horasDiarias.toFixed(1)}h/día × ${diasMes} días</div>
                     <div style="margin-top: 10px;">
                         <label for="cantidad-${indice}">Cantidad:</label>
                         <input type="number" value="${aparato.cantidad}" id="cantidad-${indice}" class="input-cantidad" min="1">
@@ -234,9 +234,9 @@ App.Consumo = (function(window, $) {
                 aparato.horasDiarias = Math.max(parseFloat(this.value) || 0, 0);
             }
 
-            const nuevoConsumo = (aparato.vatios * aparato.cantidad * aparato.horasDiarias * diasMes) / aparato.factorPotencia / 1000;
+            const nuevoConsumo = (aparato.vatios * aparato.cantidad * aparato.horasDiarias * diasMes) / 1000;
             fila.find('.consumo-item').text(`${nuevoConsumo.toFixed(2)} kWh`);
-            fila.find('.consumo-detalle').text(`${aparato.vatios}W × ${aparato.cantidad} und × ${aparato.horasDiarias}h/día × FP ${aparato.factorPotencia}`);
+            fila.find('.consumo-detalle').text(`${aparato.vatios}W × ${aparato.cantidad} und × ${aparato.horasDiarias.toFixed(1)}h/día × ${diasMes} días`);
         }, 250);
 
         $('.input-cantidad, .input-horas').on('input', debouncedUpdate);
@@ -261,7 +261,7 @@ App.Consumo = (function(window, $) {
             const watts = a.vatios * a.cantidad;
             const horas = a.horasDiarias * config.diasMes;
             potenciaActivaKwTotal += watts / 1000;
-            consumoKwhMesTotal += (watts * horas) / 1000 / a.factorPotencia;
+            consumoKwhMesTotal += (watts * horas) / 1000;
             potenciaAparenteKvaTotal += (watts / a.factorPotencia) / 1000;
         });
 
@@ -295,8 +295,7 @@ App.Consumo = (function(window, $) {
         contenedorResultados.append(
             $('<div>').addClass('caja-resultado').append('<h4>Potencia y Tarifas</h4>').append(
                 $('<div>').addClass('consumo-detalle')
-                    .append(createResultItem('Aparente Total:', `${potenciaAparenteKvaTotal.toFixed(2)} kVA`))
-                    .append(createResultItem('Activa Total:', `${(potenciaActivaKwTotal * 1000).toLocaleString()} W`))
+                    .append(createResultItem('Potencia Activa Total:', `${(potenciaActivaKwTotal * 1000).toLocaleString()} W`))
                     .append(createResultItem('Tarifa Residencial:', tarifaResidencial, 'valor valor-tarifa'))
                     .append(createResultItem('Tarifa Comercial:', tarifaComercial, 'valor valor-tarifa'))
             ),
