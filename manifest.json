@@ -1,0 +1,21 @@
+{
+  "name": "Calculadora Eléctrica Pro",
+  "short_name": "CalcEnergía",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#007bff",
+  "description": "Calculadora de consumo eléctrico offline.",
+  "icons": [
+    {
+      "src": "Assets/icons/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "Assets/icons/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
